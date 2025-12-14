@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ephata Solutions | Innovation & Strategy</title>
+    
+    <!-- Typography: Montserrat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                    },
+                    colors: {
+                        ephata: {
+                            green: '#006400', // Dark Green
+                            gold: '#FFD700',  // Yellow/Gold
+                            purple: '#6A1B9A', // Purple
+                            teal: '#00A859',   // Teal
+                            orange: '#FF4500', // Orange Accent
+                            beige: '#F5F5F5', // Light Beige for background
+                            dark: '#1A1A1A',
+                            black: '#000000',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .text-shadow { text-shadow: 0 2px 4px rgba(0,0,0,0.3); }
+            .card-shadow { box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+        }
+
+        /* Base Styles */
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: #1A1A1A;
+        }
+
+        /* Hero Background */
+        .poly-bg {
+            background-color: #006400;
+            background-image: 
+                linear-gradient(115deg, rgba(106, 27, 154, 0.9) 0%, transparent 40%),
+                linear-gradient(240deg, rgba(255, 69, 0, 0.6) 0%, transparent 30%),
+                linear-gradient(0deg, rgba(0, 168, 89, 0.4) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 215, 0, 0.3) 0%, transparent 20%);
+        }
+
+        /* Accordion */
+        .accordion-content {
+            transition: max-height 0.4s ease-out, opacity 0.4s ease-out;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+        }
+        .accordion-content.active {
+            max-height: 500px;
+            opacity: 1;
+        }
+
+        /* Blur Overlay */
+        .blur-overlay {
+            background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0.95) 50%, rgba(255,255,255,1) 100%);
+        }
+
+        html { scroll-behavior: smooth; }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.2.2",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.2/",
+    "react/": "https://esm.sh/react@^19.2.2/"
+  }
+}
+</script>
+</head>
+<body class="bg-white text-ephata-dark antialiased overflow-x-hidden">
+
+    <!-- Sticky Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-md shadow-sm border-b border-ephata-green/10 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center gap-2">
+                    <svg class="h-10 w-10 text-ephata-green" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2L2 22h20L12 2zm0 4.5L18.5 20h-13L12 6.5z"/>
+                        <path d="M12 10l-3 6h6l-3-6z" fill="#FFD700"/>
+                    </svg>
+                    <span class="font-bold text-2xl tracking-tight text-ephata-green uppercase">Ephata<span class="text-ephata-gold">.</span></span>
+                </div>
+                
+                <div class="flex items-center gap-6">
+                    <div class="hidden md:flex items-center gap-6 text-sm font-semibold text-gray-600 uppercase tracking-wider">
+                        <a href="#about" class="hover:text-ephata-green transition-colors" data-i18n="nav-about">About</a>
+                        <a href="#agro-strategy" class="hover:text-ephata-green transition-colors">Agro</a>
+                        <a href="#methodologies" class="hover:text-ephata-green transition-colors" data-i18n="nav-methods">Methodologies</a>
+                        <a href="#partners" class="hover:text-ephata-green transition-colors" data-i18n="nav-partners">Hubs</a>
+                        <a href="#contact" class="hover:text-ephata-green transition-colors" data-i18n="nav-contact">Contact</a>
+                    </div>
+                    
+                    <div class="flex items-center bg-gray-100 rounded-full px-1 py-1 border border-gray-200">
+                        <button onclick="toggleLanguage('en')" id="btn-en" class="px-3 py-1 rounded-full text-xs font-bold transition-all duration-300 bg-ephata-green text-white shadow-sm">EN</button>
+                        <button onclick="toggleLanguage('pt')" id="btn-pt" class="px-3 py-1 rounded-full text-xs font-bold transition-all duration-300 text-gray-500 hover:text-ephata-green">PT</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 1. Hero Section -->
+    <header class="poly-bg min-h-screen flex items-center justify-center pt-20 relative">
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center text-center">
+            
+            <span class="inline-block py-1 px-4 rounded-full bg-white/10 border border-ephata-gold/50 text-ephata-gold text-xs font-bold uppercase tracking-widest mb-6 backdrop-blur-sm animate-pulse">
+                Global Innovation & Strategy
+            </span>
+
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-white uppercase tracking-tight mb-6 leading-tight text-shadow max-w-5xl" data-i18n="hero-title">
+                Bridging Brazil’s Potential to Global Innovation Hubs
+            </h1>
+            
+            <p class="text-xl md:text-2xl text-gray-100 mb-4 font-light max-w-3xl mx-auto" data-i18n="hero-subtitle">
+                Engineering Strategy & Neuroscience with Marcio & Aline Almeida
+            </p>
+
+            <p class="text-ephata-gold font-semibold italic text-lg mb-10" data-i18n="hero-motto">
+                "Inspire, Educate, and Dialogue"
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4">
+                <a href="#contact" class="inline-block bg-ephata-green text-white font-bold py-4 px-10 rounded-full shadow-lg hover:bg-ephata-gold hover:text-ephata-green hover:shadow-xl transition-all duration-300 uppercase tracking-wider text-sm border-2 border-transparent" data-i18n="hero-cta">
+                    Explore Partnerships
+                </a>
+                <a href="#methodologies" class="inline-block bg-transparent text-white font-bold py-4 px-10 rounded-full shadow-lg hover:bg-white hover:text-ephata-green transition-all duration-300 uppercase tracking-wider text-sm border-2 border-white" data-i18n="hero-cta-2">
+                    Our Methodologies
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 2. About Ephata -->
+    <section id="about" class="py-24 bg-ephata-beige border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl md:text-4xl font-bold text-ephata-green uppercase mb-6" data-i18n="about-title">Discover Ephata Solutions</h2>
+                <div class="w-24 h-1 bg-ephata-gold mx-auto rounded mb-8"></div>
+                <p class="text-gray-600 max-w-3xl mx-auto leading-relaxed text-lg" data-i18n="about-desc">
+                    We are a strategic bridge connecting the robust potential of Brazilian Agribusiness and Technology to global ecosystems like Silicon Valley and Boston. With over 150 projects delivered across 27 countries, we generate results that matter—like 80% financial improvement in efficiency cases.
+                </p>
+
+                <!-- BRANDING: EPHATA ORIGIN -->
+                <div class="mt-12 mb-12 p-8 bg-white rounded-xl border-l-8 border-ephata-gold shadow-sm relative max-w-4xl mx-auto text-left">
+                    <p class="text-lg text-ephata-dark font-medium italic leading-loose">
+                        <span data-i18n="ephata-origin">
+                            Ephata (é.fa.ta) comes from a Greek word (εφατά) found specifically in the biblical passage of Mark (Mk 7:34) when Jesus says to the deaf man: EPHATA (Be opened). It is with this inspiration that Ephata aligns with you, unlocking your potential and helping you go further.
+                        </span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. BRANDING: AGRO STRATEGY SECTION -->
+    <section id="agro-strategy" class="py-24 bg-gradient-to-br from-ephata-green to-black text-white relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10" style="background-image: url('https://www.transparenttextures.com/patterns/cubes.png');"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col md:flex-row items-center gap-16">
+            <div class="md:w-1/2">
+                <span class="text-ephata-gold font-bold tracking-widest uppercase text-sm mb-2 block">Bioenergy & AgTech Focus</span>
+                <h2 class="text-3xl md:text-5xl font-bold mb-6 leading-tight" data-i18n="agro-title">From Sugarcane Fields to Global Intellectual Capital</h2>
+                <p class="text-gray-300 text-lg mb-8 leading-relaxed" data-i18n="agro-desc">
+                    Brazil is already the world's leading bioenergy production powerhouse. The next step is to lead the technology. Ephata connects your Mill's factory floor to the innovation ecosystems of St. Louis (39 North) and Silicon Valley. We transform your agronomic and industrial efficiency into globally valued Intellectual Property assets (patents and processes). Don't just export ethanol and sugar; export innovation.
+                </p>
+                <div class="flex items-center space-x-6 text-sm font-bold uppercase tracking-wide text-ephata-gold">
+                    <span class="flex items-center"><span class="text-2xl mr-2">🌱</span> Field</span>
+                    <span class="text-white opacity-30">→</span>
+                    <span class="flex items-center"><span class="text-2xl mr-2">🏭</span> Mill</span>
+                    <span class="text-white opacity-30">→</span>
+                    <span class="flex items-center"><span class="text-2xl mr-2">💡</span> Global IP</span>
+                </div>
+            </div>
+            <div class="md:w-1/2 relative">
+                <!-- Abstract visual placeholder -->
+                <div class="relative bg-white/5 backdrop-blur-md border border-white/10 p-8 rounded-2xl shadow-2xl">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-black/40 p-6 rounded-lg text-center border-t-2 border-ephata-green">
+                            <div class="text-3xl mb-2">🇧🇷</div>
+                            <div class="font-bold text-sm">Bioenergy</div>
+                        </div>
+                        <div class="bg-black/40 p-6 rounded-lg text-center border-t-2 border-ephata-gold">
+                            <div class="text-3xl mb-2">🇺🇸</div>
+                            <div class="font-bold text-sm">St. Louis</div>
+                        </div>
+                        <div class="col-span-2 bg-ephata-gold/10 p-6 rounded-lg text-center border border-ephata-gold/30">
+                            <div class="text-3xl mb-2">🌍</div>
+                            <div class="font-bold text-ephata-gold">Global Patent Assets</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Founders -->
+    <section id="founders" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-ephata-green uppercase mb-2" data-i18n="founders-title">Meet Our Visionary Founders</h2>
+                <p class="mt-4 text-gray-500 italic" data-i18n="founders-subtitle">A synergistic blend of Hard Skills and Soft Skills.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Marcio -->
+                <div class="bg-white rounded-2xl p-8 card-shadow border-2 border-ephata-green relative overflow-hidden group">
+                    <div class="flex flex-col sm:flex-row gap-6 items-center sm:items-start">
+                        <img src="https://picsum.photos/id/1/200/200" alt="Marcio Almeida" class="w-32 h-32 rounded-full object-cover border-4 border-ephata-green shadow-md">
+                        <div class="text-center sm:text-left">
+                            <h3 class="text-2xl font-bold text-gray-900">Marcio Almeida</h3>
+                            <span class="inline-block bg-ephata-green text-white text-xs font-bold px-2 py-1 rounded mb-3">CIO & Co-Founder</span>
+                            <p class="text-sm text-gray-600 mb-4" data-i18n="marcio-bio">
+                                18+ years global experience (Huawei, BT, Netreo). Author of "Empower Your Team". Expert in Scalable Architecture, IP Assets, and Innovation Engineering.
+                            </p>
+                            <div class="text-ephata-green font-bold italic" data-i18n="marcio-quote">"Mente de Engenharia"</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Aline -->
+                <div class="bg-white rounded-2xl p-8 card-shadow border-2 border-ephata-purple relative overflow-hidden group">
+                    <div class="flex flex-col sm:flex-row gap-6 items-center sm:items-start">
+                        <img src="https://picsum.photos/id/64/200/200" alt="Aline Almeida" class="w-32 h-32 rounded-full object-cover border-4 border-ephata-purple shadow-md">
+                        <div class="text-center sm:text-left">
+                            <h3 class="text-2xl font-bold text-gray-900">Aline Almeida</h3>
+                            <span class="inline-block bg-ephata-purple text-white text-xs font-bold px-2 py-1 rounded mb-3">COO & Co-Founder</span>
+                            <p class="text-sm text-gray-600 mb-4" data-i18n="aline-bio">
+                                15+ years experience. Specialist in Neuroscience & Behavior (PUCRS). Focus on Human Development, Cultural Transformation, and Behavioral Efficiency.
+                            </p>
+                            <div class="text-ephata-purple font-bold italic" data-i18n="aline-quote">"Coração de Neurociência"</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. METHODOLOGIES (Tabs + Accordion) -->
+    <section id="methodologies" class="py-24 bg-ephata-green text-white relative">
+        <div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: radial-gradient(#FFD700 1px, transparent 1px); background-size: 20px 20px;"></div>
+        
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-white uppercase mb-4" data-i18n="methods-title">Our 18 Proprietary Methodologies</h2>
+                <p class="text-ephata-gold max-w-2xl mx-auto mb-8" data-i18n="methods-subtitle">Comprehensive frameworks covering everything from patent strategy to cultural alignment.</p>
+                
+                <!-- Tab Buttons -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12 max-w-4xl mx-auto">
+                     <button onclick="filterMethodologies('individual')" class="tab-btn bg-white text-gray-500 hover:text-ephata-green text-left px-6 py-4 rounded-xl shadow-md transition-all group" id="tab-individual">
+                        <span class="block text-2xl mb-2">🧠</span>
+                        <span class="block font-bold text-xl mb-1">INDIVIDUAL</span>
+                        <span class="block text-xs opacity-70 uppercase tracking-wider mb-2">Mindset & Neuroscience</span>
+                    </button>
+                    
+                    <button onclick="filterMethodologies('team')" class="tab-btn bg-white text-gray-500 hover:text-ephata-green text-left px-6 py-4 rounded-xl shadow-md transition-all group" id="tab-team">
+                        <span class="block text-2xl mb-2">🤝</span>
+                        <span class="block font-bold text-xl mb-1">TEAM</span>
+                        <span class="block text-xs opacity-70 uppercase tracking-wider mb-2">Synergy & Culture</span>
+                    </button>
+
+                    <button onclick="filterMethodologies('company')" class="tab-btn bg-ephata-green text-white shadow-lg text-left px-6 py-4 rounded-xl border-2 border-white transition-all group active" id="tab-company">
+                        <span class="block text-2xl mb-2">🏢</span>
+                        <span class="block font-bold text-xl mb-1">COMPANY</span>
+                        <span class="block text-xs text-ephata-gold uppercase tracking-wider mb-2">Strategy & Innovation</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Accordion -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="accordion-container">
+                <!-- Injected via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. GLOBAL PARTNERSHIPS (Map Section) -->
+    <section id="partners" class="py-24 bg-ephata-beige">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-ephata-green uppercase mb-12 text-center" data-i18n="partners-title">Collaborate in Worldwide Innovation Hubs</h2>
+            
+            <!-- FIXED MAP -->
+            <div class="relative w-full h-[600px] bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-200 mb-16">
+                <!-- High Contrast Map Image -->
+                <img src="https://upload.wikimedia.org/wikipedia/commons/2/2c/World_map_blank_gmt.svg" 
+                     class="absolute inset-0 w-full h-full object-cover opacity-100 pointer-events-none grayscale contrast-[0.5] brightness-125" 
+                     alt="World Map">
+                
+                <!-- PINS (SOLID) -->
+                <div id="pin-stlouis" class="absolute w-4 h-4 bg-ephata-green rounded-full border-2 border-white shadow-md z-20 cursor-help transition-transform duration-300 group" style="top: 32%; left: 23%;">
+                    <span class="hidden group-hover:block absolute -top-10 left-1/2 -translate-x-1/2 bg-ephata-dark text-white text-sm font-bold py-2 px-4 rounded shadow-lg whitespace-nowrap z-40">St. Louis (39 North)</span>
+                </div>
+                
+                <div id="pin-valley" class="absolute w-4 h-4 bg-ephata-green rounded-full border-2 border-white shadow-md z-20 cursor-help transition-transform duration-300 group" style="top: 34%; left: 14%;">
+                    <span class="hidden group-hover:block absolute -top-10 left-1/2 -translate-x-1/2 bg-ephata-dark text-white text-sm font-bold py-2 px-4 rounded shadow-lg whitespace-nowrap z-40">Silicon Valley</span>
+                </div>
+
+                <div id="pin-illinois" class="absolute w-4 h-4 bg-ephata-green rounded-full border-2 border-white shadow-md z-20 cursor-help transition-transform duration-300 group" style="top: 31%; left: 24%;">
+                    <span class="hidden group-hover:block absolute -top-10 left-1/2 -translate-x-1/2 bg-ephata-dark text-white text-sm font-bold py-2 px-4 rounded shadow-lg whitespace-nowrap z-40">Illinois (CABBI)</span>
+                </div>
+
+                <div id="pin-piracicaba" class="absolute w-4 h-4 bg-ephata-green rounded-full border-2 border-white shadow-md z-20 cursor-help transition-transform duration-300 group" style="top: 72%; left: 34%;">
+                    <span class="hidden group-hover:block absolute -top-10 left-1/2 -translate-x-1/2 bg-ephata-dark text-white text-sm font-bold py-2 px-4 rounded shadow-lg whitespace-nowrap z-40">Piracicaba (AgTech)</span>
+                </div>
+
+                <div id="pin-ribeirao" class="absolute w-4 h-4 bg-ephata-green rounded-full border-2 border-white shadow-md z-20 cursor-help transition-transform duration-300 group" style="top: 70%; left: 35%;">
+                    <span class="hidden group-hover:block absolute -top-10 left-1/2 -translate-x-1/2 bg-ephata-dark text-white text-sm font-bold py-2 px-4 rounded shadow-lg whitespace-nowrap z-40">Ribeirão Preto</span>
+                </div>
+
+                <div id="pin-wageningen" class="absolute w-4 h-4 bg-ephata-green rounded-full border-2 border-white shadow-md z-20 cursor-help transition-transform duration-300 group" style="top: 24%; left: 49%;">
+                    <span class="hidden group-hover:block absolute -top-10 left-1/2 -translate-x-1/2 bg-ephata-dark text-white text-sm font-bold py-2 px-4 rounded shadow-lg whitespace-nowrap z-40">Food Valley (NL)</span>
+                </div>
+
+                <!-- Ghost Pins -->
+                <div class="absolute w-3 h-3 bg-gray-300 rounded-full z-10 opacity-70" style="top: 31%; left: 25%;" title="Indiana"></div>
+                <div class="absolute w-3 h-3 bg-gray-300 rounded-full z-10 opacity-70" style="top: 30%; left: 27%;" title="New York"></div>
+                <div class="absolute w-3 h-3 bg-gray-300 rounded-full z-10 opacity-70" style="top: 38%; left: 24%;" title="Louisiana"></div>
+                <div class="absolute w-3 h-3 bg-gray-300 rounded-full z-10 opacity-70" style="top: 28%; left: 26%;" title="Canada"></div>
+                <div class="absolute w-3 h-3 bg-gray-300 rounded-full z-10 opacity-70" style="top: 50%; left: 22%;" title="Costa Rica"></div>
+                <div class="absolute w-3 h-3 bg-gray-300 rounded-full z-10 opacity-70" style="top: 80%; left: 32%;" title="Argentina"></div>
+                <div class="absolute w-3 h-3 bg-gray-300 rounded-full z-10 opacity-70" style="top: 78%; left: 29%;" title="Chile"></div>
+            </div>
+
+            <!-- Table Lead Magnet -->
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-white rounded-t-xl shadow-lg border border-gray-200 overflow-hidden relative">
+                    <div class="bg-gray-50 px-6 py-4 border-b border-gray-200 grid grid-cols-2 font-bold text-ephata-green text-xs md:text-sm uppercase tracking-wider">
+                        <div>Strategic Hub</div>
+                        <div class="text-right">Core Focus</div>
+                    </div>
+                    
+                    <div class="px-6 py-4 border-b border-gray-100 grid grid-cols-2 text-sm text-gray-700 hover:bg-green-50 transition-colors cursor-pointer" onmouseenter="highlightPin('pin-stlouis')" onmouseleave="resetPin('pin-stlouis')">
+                        <div class="font-bold">39 North (St. Louis)</div>
+                        <div class="text-right text-gray-500">AgTech & Plant Science</div>
+                    </div>
+                    <div class="px-6 py-4 border-b border-gray-100 grid grid-cols-2 text-sm text-gray-700 hover:bg-green-50 transition-colors cursor-pointer" onmouseenter="highlightPin('pin-wageningen')" onmouseleave="resetPin('pin-wageningen')">
+                        <div class="font-bold">Food Valley (NL)</div>
+                        <div class="text-right text-gray-500">Food Innovation</div>
+                    </div>
+                    <div class="px-6 py-4 border-b border-gray-100 grid grid-cols-2 text-sm text-gray-700 hover:bg-green-50 transition-colors cursor-pointer" onmouseenter="highlightPin('pin-illinois')" onmouseleave="resetPin('pin-illinois')">
+                        <div class="font-bold">CABBI (USA)</div>
+                        <div class="text-right text-gray-500">Advanced Bioenergy</div>
+                    </div>
+                    <div class="px-6 py-4 border-b border-gray-100 grid grid-cols-2 text-sm text-gray-700 hover:bg-green-50 transition-colors cursor-pointer" onmouseenter="highlightPin('pin-valley')" onmouseleave="resetPin('pin-valley')">
+                        <div class="font-bold">Plug and Play (Silicon Valley)</div>
+                        <div class="text-right text-gray-500">Venture Capital</div>
+                    </div>
+                    <div class="px-6 py-4 grid grid-cols-2 text-sm text-gray-700 hover:bg-green-50 transition-colors cursor-pointer" onmouseenter="highlightPin('pin-piracicaba')" onmouseleave="resetPin('pin-piracicaba')">
+                        <div class="font-bold">AgTech Valley (Brazil)</div>
+                        <div class="text-right text-gray-500">Tropical Agriculture</div>
+                    </div>
+                </div>
+                
+                <!-- Blur CTA -->
+                <div class="relative -mt-16 pt-16 pb-8 blur-overlay z-10 flex flex-col items-center justify-center rounded-b-xl border-t border-transparent">
+                     <button class="bg-ephata-gold text-ephata-green font-bold py-4 px-8 rounded-full shadow-lg hover:bg-white hover:scale-105 transition-all transform flex items-center gap-3 border border-ephata-gold">
+                        <span class="text-xl">🔒</span> 
+                        <span data-i18n="download-cta">Download Global Intelligence Report (PDF) - Access +50 Strategic Hubs</span>
+                    </button>
+                    <p class="text-xs text-gray-400 mt-2 uppercase tracking-wide">Exclusive for Ephata Partners</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. CLIENT LOGOS (NO EMOJIS, CLEAN) -->
+    <section class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-center text-3xl font-bold text-ephata-green uppercase mb-16" data-i18n="impact-title">Our Global Footprint</h2>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center mb-20">
+                <div class="p-6 bg-gray-50 rounded-xl"><div class="text-4xl font-extrabold text-ephata-purple mb-2">150+</div><div class="text-xs uppercase font-bold text-gray-500">Projects Delivered</div></div>
+                <div class="p-6 bg-gray-50 rounded-xl"><div class="text-4xl font-extrabold text-ephata-green mb-2">27</div><div class="text-xs uppercase font-bold text-gray-500">Countries Reached</div></div>
+                <div class="p-6 bg-gray-50 rounded-xl"><div class="text-4xl font-extrabold text-ephata-orange mb-2">7.5k+</div><div class="text-xs uppercase font-bold text-gray-500">Leaders Trained</div></div>
+                <div class="p-6 bg-gray-50 rounded-xl"><div class="text-4xl font-extrabold text-ephata-gold mb-2">80%</div><div class="text-xs uppercase font-bold text-gray-500">Efficiency Gain</div></div>
+            </div>
+
+            <p class="text-center text-gray-400 uppercase tracking-widest text-sm mb-12">Trusted By Industry Giants</p>
+            
+            <!-- CLEAN LOGO GRID -->
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 items-center justify-items-center opacity-80 select-none cursor-default">
+                <div class="text-xl font-bold text-gray-500 hover:text-gray-600 transition-colors">John Deere</div>
+                <div class="text-xl font-bold text-gray-500 hover:text-gray-600 transition-colors">Cocal</div>
+                <div class="text-xl font-bold text-gray-500 hover:text-gray-600 transition-colors">Suzano</div>
+                <div class="text-xl font-bold text-gray-500 hover:text-gray-600 transition-colors">CMPC</div>
+                
+                <div class="text-xl font-bold text-gray-500 hover:text-gray-600 transition-colors">Google</div>
+                <div class="text-xl font-bold text-gray-500 hover:text-gray-600 transition-colors">Amazon</div>
+                <div class="text-xl font-bold text-gray-500 hover:text-gray-600 transition-colors">SAP</div>
+                <div class="text-xl font-bold text-gray-500 hover:text-gray-600 transition-colors">Salesforce</div>
+                <div class="text-xl font-bold text-gray-500 hover:text-gray-600 transition-colors">Embraer</div>
+                <div class="text-xl font-bold text-gray-500 hover:text-gray-600 transition-colors">Siemens</div>
+                
+                <div class="text-xl font-bold text-gray-500 hover:text-gray-600 transition-colors col-span-2 md:col-span-1">SingularityU</div>
+                <div class="text-xl font-bold text-gray-500 hover:text-gray-600 transition-colors col-span-2 md:col-span-1">Unilever</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. FAQs -->
+    <section class="py-16 bg-ephata-beige border-t border-gray-200">
+        <div class="max-w-4xl mx-auto px-4">
+            <h2 class="text-2xl font-bold text-ephata-dark mb-8 text-center" data-i18n="faq-title">Frequently Asked Questions</h2>
+            <div class="space-y-4" id="faq-container"></div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="bg-ephata-green text-white py-16 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-64 h-64 bg-ephata-gold opacity-10 rounded-full blur-3xl"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="flex flex-col md:flex-row justify-between items-center text-center md:text-left gap-8">
+                <div>
+                    <h2 class="text-3xl font-bold uppercase mb-4 text-white">Open Doors to Innovation</h2>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                        <a href="#" class="px-8 py-3 bg-white text-ephata-green font-bold rounded-full hover:bg-ephata-gold transition-colors" data-i18n="footer-btn-call">Schedule Call</a>
+                        <a href="#" class="px-8 py-3 border border-white text-white font-bold rounded-full hover:bg-white hover:text-ephata-green transition-colors" data-i18n="footer-btn-pdf">Download Portfolio</a>
+                    </div>
+                </div>
+                <div class="text-sm opacity-80">
+                    &copy; 2024 Ephata Solutions.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        const translations = {
+            en: {
+                "nav-about": "About", "nav-founders": "Founders", "nav-methods": "Methodologies", "nav-partners": "Global Hubs", "nav-contact": "Contact",
+                "hero-title": "Bridging Brazil’s Potential to Global Innovation Hubs",
+                "hero-subtitle": "Engineering Strategy & Neuroscience with Marcio & Aline Almeida",
+                "hero-motto": "\"Inspire, Educate, and Dialogue\"",
+                "hero-cta": "Explore Partnerships", "hero-cta-2": "Our Methodologies",
+                "about-title": "Discover Ephata Solutions",
+                "about-desc": "We are a strategic bridge connecting the robust potential of Brazilian Agribusiness and Technology to global ecosystems like Silicon Valley and Boston. With over 150 projects delivered across 27 countries, we generate results that matter—like 80% financial improvement in efficiency cases.",
+                "ephata-origin": "Ephata (é.fa.ta) comes from a Greek word (εφατά) found specifically in the biblical passage of Mark (Mk 7:34) when Jesus says to the deaf man: EPHATA (Be opened). It is with this inspiration that Ephata aligns with you, unlocking your potential and helping you go further.",
+                "agro-title": "From Sugarcane Fields to Global Intellectual Capital",
+                "agro-desc": "Brazil is already the world's leading bioenergy production powerhouse. The next step is to lead the technology. Ephata connects your Mill's factory floor to the innovation ecosystems of St. Louis (39 North) and Silicon Valley. We transform your agronomic and industrial efficiency into globally valued Intellectual Property assets (patents and processes). Don't just export ethanol and sugar; export innovation.",
+                "methods-title": "Our 18 Proprietary Methodologies",
+                "methods-subtitle": "Comprehensive frameworks covering everything from patent strategy to cultural alignment.",
+                "partners-title": "Collaborate in Worldwide Innovation Hubs",
+                "download-cta": "Download Global Intelligence Report (PDF) - Access +50 Strategic Hubs",
+                "impact-title": "Our Global Footprint",
+                "faq-title": "Frequently Asked Questions",
+                "footer-btn-call": "Schedule Call", "footer-btn-pdf": "Download Portfolio",
+                "founders-title": "Meet Our Visionary Founders", "founders-subtitle": "A synergistic blend of Hard Skills and Soft Skills.",
+                "marcio-bio": "18+ years global experience (Huawei, BT, Netreo). Author of \"Empower Your Team\". Expert in Scalable Architecture, IP Assets, and Innovation Engineering.",
+                "marcio-quote": "\"Engineering Mind\"",
+                "aline-bio": "15+ years experience. Specialist in Neuroscience & Behavior (PUCRS). Focus on Human Development, Cultural Transformation, and Behavioral Efficiency.",
+                "aline-quote": "\"Neuroscience Heart\""
+            },
+            pt: {
+                "nav-about": "Sobre", "nav-founders": "Fundadores", "nav-methods": "Metodologias", "nav-partners": "Hubs Globais", "nav-contact": "Contato",
+                "hero-title": "Transformando Cultura em Resultado e Legado no Agronegócio",
+                "hero-subtitle": "Estratégia de Engenharia & Neurociência com Marcio & Aline Almeida",
+                "hero-motto": "\"Inspirar, Educar e Dialogar\"",
+                "hero-cta": "Explorar Parcerias", "hero-cta-2": "Nossas Metodologias",
+                "about-title": "Descubra a Ephata Solutions",
+                "about-desc": "Somos uma ponte estratégica conectando o potencial do Agronegócio e Tecnologia brasileira a ecossistemas globais como Vale do Silício e Boston. Com mais de 150 projetos entregues em 27 países, geramos resultados reais—como 80% de melhoria financeira em casos de eficiência.",
+                "ephata-origin": "Ephata (é.fa.ta) vem de uma palavra grega (εφατά) encontrada especificamente na passagem bíblica de Marcos (Mc 7,34) quando Jesus diz ao surdo: EFATÁ (Abra-te). É com esta inspiração que a Ephata se alinha com você, destrancando seu potencial e ajudando você a ir além.",
+                "agro-title": "Dos Canaviais ao Capital Intelectual Global",
+                "agro-desc": "O Brasil já é a potência líder mundial em produção de bioenergia. O próximo passo é liderar a tecnologia. A Ephata conecta o chão de fábrica da sua Usina aos ecossistemas de inovação de St. Louis (39 North) e Vale do Silício. Transformamos sua eficiência agronômica e industrial em ativos de Propriedade Intelectual (patentes e processos) valorizados globalmente. Não exporte apenas etanol e açúcar; exporte inovação.",
+                "methods-title": "Nossas 18 Metodologias Proprietárias",
+                "methods-subtitle": "Frameworks abrangentes cobrindo desde estratégia de patentes até alinhamento cultural.",
+                "partners-title": "Colaboração em Hubs de Inovação Globais",
+                "download-cta": "Baixar Relatório de Inteligência (PDF) - +50 Hubs",
+                "impact-title": "Nossa Pegada Global",
+                "faq-title": "Perguntas Frequentes",
+                "footer-btn-call": "Agendar Reunião", "footer-btn-pdf": "Baixar Portfólio",
+                "founders-title": "Conheça Nossos Fundadores", "founders-subtitle": "Uma mistura sinérgica de Hard Skills e Soft Skills.",
+                "marcio-bio": "Mais de 18 anos de exp global (Huawei, BT, Netreo). Autor de \"Empower Your Team\". Especialista em Arquitetura Escalável, Gestão de Ativos e Engenharia de Inovação.",
+                "marcio-quote": "\"Mente de Engenharia\"",
+                "aline-bio": "Mais de 15 anos de exp. Especialista em Neurociência e Comportamento (PUCRS). Foco em Desenvolvimento Humano, Transformação Cultural e Eficiência Comportamental.",
+                "aline-quote": "\"Coração de Neurociência\""
+            }
+        };
+
+        // Data Lists (NO PADOCA)
+        const methodologiesData = [
+            { code: "GAE®", category: "company", nameEn: "Strategic Asset Management", namePt: "Gestão de Ativos", descEn: "Patent strategy & IP protection.", descPt: "Estratégia de patentes e proteção de IP." },
+            { code: "ASIR®", category: "company", nameEn: "Regenerative Innovation Architecture", namePt: "Arquitetura de Inovação", descEn: "Roadmaps H1-H3 & TRL Analysis.", descPt: "Roadmaps H1-H3 e Análise TRL." },
+            { code: "ECIC®", category: "company", nameEn: "Convergent Connections", namePt: "Conexões Convergentes", descEn: "Global ecosystem orchestration.", descPt: "Orquestração de ecossistemas globais." },
+            { code: "NAIC®", category: "company", nameEn: "Applied AI & Intel", namePt: "IA Aplicada", descEn: "AI for automation/prediction.", descPt: "IA para automação/predição." },
+            { code: "ROE®", category: "company", nameEn: "Opportunity Radar", namePt: "Radar de Oportunidades", descEn: "Trend prospecting.", descPt: "Prospecção de tendências." },
+            { code: "ODSS®", category: "company", nameEn: "Strategic Diagnostic", namePt: "Diagnóstico Estratégico", descEn: "Deep market analysis.", descPt: "Análise profunda de mercado." },
+            { code: "CJEAI®", category: "company", nameEn: "Legal-Strategic IP", namePt: "Proteção Jurídica IP", descEn: "Legal rigor for innovation.", descPt: "Rigor jurídico para inovação." },
+            { code: "Startup Oven®", category: "company", nameEn: "Strategic Incubation", namePt: "Incubação Estratégica", descEn: "Internal venture building.", descPt: "Construção de venture interna." },
+            { code: "ETCD®", category: "team", nameEn: "Cultural Transformation", namePt: "Transformação Cultural", descEn: "Mindset shifts.", descPt: "Mudança de mindset." },
+            { code: "SAEM®", category: "team", nameEn: "Multilevel Alignment", namePt: "Alinhamento Multinível", descEn: "Connecting goals to drivers.", descPt: "Conectando metas aos drivers." },
+            { code: "PPAR®", category: "team", nameEn: "Active Performance", namePt: "Performance Ativa", descEn: "Gamified engagement.", descPt: "Engajamento gamificado." },
+            { code: "PSSR®", category: "team", nameEn: "Succession Program", namePt: "Sucessão Estratégica", descEn: "Leadership continuity.", descPt: "Continuidade de liderança." },
+            { code: "ELAC®", category: "individual", nameEn: "Leadership Academy", namePt: "Academia de Liderança", descEn: "Complex environment training.", descPt: "Treino para ambientes complexos." },
+            { code: "JETC®", category: "individual", nameEn: "Behavioral Journey", namePt: "Jornada Comportamental", descEn: " aligning behavior to strategy.", descPt: "Alinhando comportamento à estratégia." },
+            { code: "MEIR®", category: "individual", nameEn: "Impact Mentoring", namePt: "Mentoria de Impacto", descEn: "Executive mentoring.", descPt: "Mentoria executiva." },
+            { code: "MICIO®", category: "individual", nameEn: "Competency Mapping", namePt: "Mapeamento de Competências", descEn: "360º influence mapping.", descPt: "Mapeamento 360º de influência." },
+            { code: "LDIA®", category: "individual", nameEn: "Innovation Labs", namePt: "Labs de Inovação", descEn: "Applied co-creation.", descPt: "Cocriação aplicada." },
+        ];
+
+        const faqData = [
+            { qEn: "How does Ephata turn my bioenergy production into global assets?", qPt: "Como a Ephata transforma minha produção em ativos globais?", aEn: "We connect your mill to hubs like CABBI and RCGI to validate 2G Ethanol/Green Hydrogen and patent them via GAE®.", aPt: "Conectamos sua usina a hubs como CABBI e RCGI para validar Etanol 2G/Hidrogênio Verde e patenteá-los via GAE®." },
+            { qEn: "I'm an AgTech founder. How does Ephata help me scale?", qPt: "Sou fundador de AgTech. Como a Ephata me ajuda a escalar?", aEn: "We use Startup Oven® to validate your model inside corporations and leverage networks like Plug and Play for global funding.", aPt: "Usamos o Startup Oven® para validar seu modelo dentro de corporações e alavancar redes como Plug and Play para funding global." },
+            { qEn: "I represent an International Hub. How can we collaborate?", qPt: "Represento um Hub Internacional. Como podemos colaborar?", aEn: "Ephata acts as a 'Technical Scout' in Brazil, filtering opportunities via MICIO® and ODSS® to deliver qualified deal flow.", aPt: "A Ephata atua como 'Technical Scout' no Brasil, filtrando oportunidades via MICIO® e ODSS® para entregar deal flow qualificado." },
+            { qEn: "Is there room for academic research partnerships?", qPt: "Existe espaço para parcerias de pesquisa acadêmica?", aEn: "Yes. ECIC® methodology bridges academia (like Esalq/USP and Cornell) with industry to turn research into market products.", aPt: "Sim. A metodologia ECIC® une academia (como Esalq/USP e Cornell) à indústria para transformar pesquisa em produtos de mercado." }
+        ];
+
+        // LOGIC
+        function filterMethodologies(category) {
+            // 1. Reset
+            ['individual', 'team', 'company'].forEach(cat => {
+                const btn = document.getElementById('tab-' + cat);
+                if(btn) {
+                    btn.classList.remove('bg-ephata-green', 'text-white', 'shadow-lg');
+                    btn.classList.add('bg-white', 'text-gray-500', 'hover:text-ephata-green');
+                    // Reset border styling if needed, keeping simple class switch as requested
+                }
+            });
+
+            // 2. Activate
+            const activeBtn = document.getElementById('tab-' + category);
+            if(activeBtn) {
+                activeBtn.classList.remove('bg-white', 'text-gray-500', 'hover:text-ephata-green');
+                activeBtn.classList.add('bg-ephata-green', 'text-white', 'shadow-lg');
+            }
+
+            // 3. Filter & Render
+            const currentLang = localStorage.getItem('ephata-lang') || 'en';
+            const container = document.getElementById('accordion-container');
+            container.innerHTML = '';
+            
+            const filtered = methodologiesData.filter(m => m.category === category);
+            
+            filtered.forEach((item, index) => {
+                const name = currentLang === 'en' ? item.nameEn : item.namePt;
+                const desc = currentLang === 'en' ? item.descEn : item.descPt;
+                
+                const html = `
+                    <div class="border border-white/20 rounded-lg bg-white/5 overflow-hidden hover:bg-white/10 transition-colors">
+                        <button class="w-full text-left px-6 py-4 flex justify-between items-center text-white focus:outline-none" onclick="toggleAccordion('meth-${index}')">
+                            <span class="font-bold text-lg flex items-center">
+                                <span class="text-ephata-gold mr-3">${item.code}</span> ${name}
+                            </span>
+                            <span id="icon-meth-${index}" class="text-2xl font-light transform transition-transform">+</span>
+                        </button>
+                        <div id="meth-${index}" class="accordion-content bg-black/20">
+                            <div class="px-6 py-4 text-gray-200 border-t border-white/10 text-sm leading-relaxed"><p>${desc}</p></div>
+                        </div>
+                    </div>`;
+                container.innerHTML += html;
+            });
+        }
+
+        // Interaction Maps
+        function highlightPin(id) {
+            const pin = document.getElementById(id);
+            if(pin) {
+                pin.classList.add('scale-150');
+            }
+        }
+        function resetPin(id) {
+            const pin = document.getElementById(id);
+            if(pin) {
+                pin.classList.remove('scale-150');
+            }
+        }
+
+        function toggleAccordion(id) {
+            const content = document.getElementById(id);
+            const icon = document.getElementById('icon-' + id);
+            content.classList.toggle('active');
+            if (content.classList.contains('active')) {
+                icon.style.transform = 'rotate(45deg)'; 
+                if(id.startsWith('faq')) icon.style.transform = 'rotate(180deg)'; 
+            } else {
+                icon.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        function renderFAQs(lang) {
+            const container = document.getElementById('faq-container');
+            container.innerHTML = '';
+            faqData.forEach((item, index) => {
+                const q = lang === 'en' ? item.qEn : item.qPt;
+                const a = lang === 'en' ? item.aEn : item.aPt;
+                const html = `
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
+                        <button class="w-full text-left px-6 py-5 flex justify-between items-center text-ephata-green font-bold hover:bg-gray-50 transition-colors focus:outline-none" onclick="toggleAccordion('faq-${index}')">
+                            <span class="text-sm md:text-base">${q}</span>
+                            <span id="icon-faq-${index}" class="text-xl transform transition-transform text-ephata-gold">▼</span>
+                        </button>
+                        <div id="faq-${index}" class="accordion-content">
+                            <div class="px-6 py-4 text-gray-600 border-t border-gray-100 text-sm leading-relaxed"><p>${a}</p></div>
+                        </div>
+                    </div>`;
+                container.innerHTML += html;
+            });
+        }
+
+        function toggleLanguage(lang) {
+            localStorage.setItem('ephata-lang', lang);
+            updateLanguageUI(lang);
+        }
+
+        function updateLanguageUI(lang) {
+            const t = translations[lang];
+            for (const key in t) {
+                const el = document.querySelector(`[data-i18n="${key}"]`);
+                if (el) el.innerHTML = t[key];
+            }
+            
+            // Buttons
+            const btnEn = document.getElementById('btn-en');
+            const btnPt = document.getElementById('btn-pt');
+            if (lang === 'en') {
+                btnEn.classList.replace('text-gray-500', 'text-white'); btnEn.classList.replace('bg-transparent', 'bg-ephata-green'); btnEn.classList.add('shadow-sm');
+                btnPt.classList.replace('text-white', 'text-gray-500'); btnPt.classList.replace('bg-ephata-green', 'bg-transparent'); btnPt.classList.remove('shadow-sm');
+            } else {
+                btnPt.classList.replace('text-gray-500', 'text-white'); btnPt.classList.replace('bg-transparent', 'bg-ephata-green'); btnPt.classList.add('shadow-sm');
+                btnEn.classList.replace('text-white', 'text-gray-500'); btnEn.classList.replace('bg-ephata-green', 'bg-transparent'); btnEn.classList.remove('shadow-sm');
+            }
+
+            // Re-render
+            let activeCat = 'company';
+            if(document.getElementById('tab-individual').classList.contains('bg-ephata-green')) activeCat = 'individual';
+            if(document.getElementById('tab-team').classList.contains('bg-ephata-green')) activeCat = 'team';
+            filterMethodologies(activeCat);
+            renderFAQs(lang);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('ephata-lang') || 'en';
+            updateLanguageUI(savedLang);
+        });
+    </script>
+</body>
+</html>
