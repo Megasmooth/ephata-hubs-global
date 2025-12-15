@@ -296,11 +296,13 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="text-3xl font-bold text-ephata-green uppercase mb-12 text-center" data-i18n="partners-title">Collaborate in Worldwide Innovation Hubs</h2>
             
-            <!-- FIXED MAP: Changed BG to slate-100 and switched to PNG for better contrast -->
-            <div class="relative w-full h-[600px] bg-slate-100 rounded-2xl overflow-hidden shadow-sm border border-gray-200 mb-16">
-                <!-- High Contrast Map Image (PNG Version) -->
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/World_map_blank_gmt.svg/2560px-World_map_blank_gmt.svg.png" 
-                     class="absolute inset-0 w-full h-full object-cover opacity-20 pointer-events-none mix-blend-multiply" 
+            <!-- FIXED MAP: Clean Approach with Silhouette -->
+            <div class="relative w-full h-[600px] bg-slate-50 rounded-2xl overflow-hidden shadow-sm border border-gray-200 mb-16">
+                <!-- High Contrast Map Image (Using Filter for silhouette effect) -->
+                <!-- Use a very standard, solid SVG and force it to be a faint black silhouette via CSS filters -->
+                <img src="https://upload.wikimedia.org/wikipedia/commons/8/80/World_map_-_low_resolution.svg" 
+                     class="absolute inset-0 w-full h-full object-cover"
+                     style="filter: grayscale(100%) brightness(0) opacity(0.1);" 
                      alt="World Map">
                 
                 <!-- PINS (SOLID) -->
