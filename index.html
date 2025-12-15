@@ -75,6 +75,17 @@
             background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0.95) 50%, rgba(255,255,255,1) 100%);
         }
 
+        /* Modal Transitions */
+        .modal {
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .modal.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
         html { scroll-behavior: smooth; }
     </style>
 <script type="importmap">
@@ -330,14 +341,14 @@
                     <span class="hidden group-hover:block absolute -top-10 left-1/2 -translate-x-1/2 bg-ephata-dark text-white text-sm font-bold py-2 px-4 rounded shadow-lg whitespace-nowrap z-40">Food Valley (NL)</span>
                 </div>
 
-                <!-- Ghost Pins -->
-                <div class="absolute w-3 h-3 bg-gray-300 rounded-full z-10 opacity-70" style="top: 31%; left: 25%;" title="Indiana"></div>
-                <div class="absolute w-3 h-3 bg-gray-300 rounded-full z-10 opacity-70" style="top: 30%; left: 27%;" title="New York"></div>
-                <div class="absolute w-3 h-3 bg-gray-300 rounded-full z-10 opacity-70" style="top: 38%; left: 24%;" title="Louisiana"></div>
-                <div class="absolute w-3 h-3 bg-gray-300 rounded-full z-10 opacity-70" style="top: 28%; left: 26%;" title="Canada"></div>
-                <div class="absolute w-3 h-3 bg-gray-300 rounded-full z-10 opacity-70" style="top: 50%; left: 22%;" title="Costa Rica"></div>
-                <div class="absolute w-3 h-3 bg-gray-300 rounded-full z-10 opacity-70" style="top: 80%; left: 32%;" title="Argentina"></div>
-                <div class="absolute w-3 h-3 bg-gray-300 rounded-full z-10 opacity-70" style="top: 78%; left: 29%;" title="Chile"></div>
+                <!-- Ghost Pins - UPDATED TO BLACK FOR CONTRAST -->
+                <div class="absolute w-3 h-3 bg-black rounded-full z-10 opacity-60" style="top: 31%; left: 25%;" title="Indiana"></div>
+                <div class="absolute w-3 h-3 bg-black rounded-full z-10 opacity-60" style="top: 30%; left: 27%;" title="New York"></div>
+                <div class="absolute w-3 h-3 bg-black rounded-full z-10 opacity-60" style="top: 38%; left: 24%;" title="Louisiana"></div>
+                <div class="absolute w-3 h-3 bg-black rounded-full z-10 opacity-60" style="top: 28%; left: 26%;" title="Canada"></div>
+                <div class="absolute w-3 h-3 bg-black rounded-full z-10 opacity-60" style="top: 50%; left: 22%;" title="Costa Rica"></div>
+                <div class="absolute w-3 h-3 bg-black rounded-full z-10 opacity-60" style="top: 80%; left: 32%;" title="Argentina"></div>
+                <div class="absolute w-3 h-3 bg-black rounded-full z-10 opacity-60" style="top: 78%; left: 29%;" title="Chile"></div>
             </div>
 
             <!-- Table Lead Magnet -->
@@ -372,7 +383,7 @@
                 
                 <!-- Blur CTA -->
                 <div class="relative -mt-16 pt-16 pb-8 blur-overlay z-10 flex flex-col items-center justify-center rounded-b-xl border-t border-transparent">
-                     <button class="bg-ephata-gold text-ephata-green font-bold py-4 px-8 rounded-full shadow-lg hover:bg-white hover:scale-105 transition-all transform flex items-center gap-3 border border-ephata-gold">
+                     <button onclick="openLeadModal()" class="bg-ephata-gold text-ephata-green font-bold py-4 px-8 rounded-full shadow-lg hover:bg-white hover:scale-105 transition-all transform flex items-center gap-3 border border-ephata-gold">
                         <span class="text-xl">🔒</span> 
                         <span data-i18n="download-cta">Download Global Intelligence Report (PDF) - Access +50 Strategic Hubs</span>
                     </button>
@@ -432,8 +443,8 @@
                 <div>
                     <h2 class="text-3xl font-bold uppercase mb-4 text-white">Open Doors to Innovation</h2>
                     <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-                        <a href="https://api.whatsapp.com/send?phone=5519988378672&text=Reunião%20/%20Meeting" target="_blank" class="px-8 py-3 bg-white text-ephata-green font-bold rounded-full hover:bg-ephata-gold transition-colors" data-i18n="footer-btn-call">Schedule Call</a>
-                        <a href="https://www.ephata.solutions/download-portfolio" target="_blank" class="px-8 py-3 border border-white text-white font-bold rounded-full hover:bg-white hover:text-ephata-green transition-colors" data-i18n="footer-btn-pdf">Download Portfolio</a>
+                        <a href="https://api.whatsapp.com/send?phone=5519988378672&text=Quero%20ajuda%20" target="_blank" class="px-8 py-3 bg-white text-ephata-green font-bold rounded-full hover:bg-ephata-gold transition-colors" data-i18n="footer-btn-call">Schedule Call</a>
+                        <button onclick="openLeadModal()" class="px-8 py-3 border border-white text-white font-bold rounded-full hover:bg-white hover:text-ephata-green transition-colors" data-i18n="footer-btn-pdf">Download Portfolio</button>
                     </div>
                 </div>
                 <div class="text-sm opacity-80">
@@ -442,6 +453,72 @@
             </div>
         </div>
     </footer>
+
+    <!-- MODAL LEAD FORM -->
+    <div id="lead-modal" class="modal fixed inset-0 z-50 flex items-center justify-center p-4">
+        <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" onclick="closeLeadModal()"></div>
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg relative z-10 overflow-hidden">
+            <div class="bg-ephata-green p-6 flex justify-between items-center">
+                <h3 class="text-white font-bold text-xl uppercase tracking-wide">Request Access</h3>
+                <button onclick="closeLeadModal()" class="text-white hover:text-ephata-gold text-2xl font-bold">&times;</button>
+            </div>
+            <div class="p-8 max-h-[80vh] overflow-y-auto">
+                <form onsubmit="submitLeadForm(event)" class="space-y-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Name / Nome</label>
+                            <input type="text" id="lead-name" required class="w-full border border-gray-300 rounded p-2 focus:ring-2 focus:ring-ephata-green outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Email</label>
+                            <input type="email" id="lead-email" required class="w-full border border-gray-300 rounded p-2 focus:ring-2 focus:ring-ephata-green outline-none">
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Company / Empresa</label>
+                            <input type="text" id="lead-company" required class="w-full border border-gray-300 rounded p-2 focus:ring-2 focus:ring-ephata-green outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Job / Cargo</label>
+                            <input type="text" id="lead-job" required class="w-full border border-gray-300 rounded p-2 focus:ring-2 focus:ring-ephata-green outline-none">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Mobile (with Country Code)</label>
+                        <input type="tel" id="lead-mobile" placeholder="+55 11 99999-9999" required class="w-full border border-gray-300 rounded p-2 focus:ring-2 focus:ring-ephata-green outline-none">
+                    </div>
+                    
+                    <div class="pt-4">
+                        <label class="block text-sm font-bold text-ephata-green uppercase mb-3 border-b pb-1">I am interested in:</label>
+                        <div class="space-y-2">
+                            <label class="flex items-center space-x-3 cursor-pointer">
+                                <input type="checkbox" name="interest" value="Reunião / Meeting" class="form-checkbox h-5 w-5 text-ephata-green rounded border-gray-300 focus:ring-ephata-green">
+                                <span class="text-sm text-gray-700">Meeting / Reunião de Diagnóstico</span>
+                            </label>
+                            <label class="flex items-center space-x-3 cursor-pointer">
+                                <input type="checkbox" name="interest" value="Portfólio Completo / Full Portfolio" class="form-checkbox h-5 w-5 text-ephata-green rounded border-gray-300 focus:ring-ephata-green">
+                                <span class="text-sm text-gray-700">Full Portfolio / Portfólio Completo</span>
+                            </label>
+                            <label class="flex items-center space-x-3 cursor-pointer">
+                                <input type="checkbox" name="interest" value="Produtos Ephata / Ephata Products" class="form-checkbox h-5 w-5 text-ephata-green rounded border-gray-300 focus:ring-ephata-green">
+                                <span class="text-sm text-gray-700">Ephata Methodologies & Products</span>
+                            </label>
+                            <label class="flex items-center space-x-3 cursor-pointer">
+                                <input type="checkbox" name="interest" value="Hubs Globais / Global Hubs" class="form-checkbox h-5 w-5 text-ephata-green rounded border-gray-300 focus:ring-ephata-green">
+                                <span class="text-sm text-gray-700">Global Innovation Hubs (USA/EU)</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="w-full bg-ephata-green text-white font-bold py-3 rounded-lg shadow-md hover:bg-ephata-dark transition-colors mt-6 uppercase tracking-wider">
+                        Send Request / Enviar
+                    </button>
+                    <p class="text-xs text-center text-gray-400 mt-2">Your data is safe with us.</p>
+                </form>
+            </div>
+        </div>
+    </div>
 
     <!-- JAVASCRIPT -->
     <script>
@@ -467,7 +544,8 @@
                 "founders-title": "Meet Our Visionary Founders", "founders-subtitle": "A synergistic blend of Hard Skills and Soft Skills.",
                 "marcio-bio": "18+ years global experience (Huawei, BT, Netreo). Author of \"Empower Your Team\". Expert in Scalable Architecture, IP Assets, and Innovation Engineering.",
                 "marcio-quote": "\"Engineering Mind\"",
-                "aline-bio": "15+ years experience. Specialist in Neuroscience & Behavior (PUCRS). Focus on Human Development, Cultural Transformation, and Behavioral Efficiency.",
+                "aline-bio": "15+ years experience. Specialist in Neuroscience & Behavior (PUCRS). Focus on Human Development, Cultural Transformation, and Behavioral Efficiency.
+                ",
                 "aline-quote": "\"Neuroscience Heart\""
             },
             pt: {
@@ -645,6 +723,47 @@
             if(document.getElementById('tab-team').classList.contains('bg-ephata-green')) activeCat = 'team';
             filterMethodologies(activeCat);
             renderFAQs(lang);
+        }
+
+        /* MODAL LOGIC */
+        function openLeadModal() {
+            document.getElementById('lead-modal').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeLeadModal() {
+            document.getElementById('lead-modal').classList.remove('open');
+            document.body.style.overflow = 'auto';
+        }
+        
+        function submitLeadForm(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('lead-name').value;
+            const email = document.getElementById('lead-email').value;
+            const company = document.getElementById('lead-company').value;
+            const job = document.getElementById('lead-job').value;
+            const mobile = document.getElementById('lead-mobile').value;
+            
+            // Get Checkboxes
+            const checkboxes = document.querySelectorAll('input[name="interest"]:checked');
+            let interests = [];
+            checkboxes.forEach((cb) => {
+                interests.push(cb.value);
+            });
+            
+            const subject = encodeURIComponent(`Ephata Portfolio Request: ${name} (${company})`);
+            const body = encodeURIComponent(
+                `Name: ${name}\n` +
+                `Email: ${email}\n` +
+                `Company: ${company}\n` +
+                `Job Title: ${job}\n` +
+                `Mobile: ${mobile}\n\n` +
+                `Interests:\n- ${interests.join('\n- ')}\n`
+            );
+            
+            window.location.href = `mailto:contato@ephata.solutions?subject=${subject}&body=${body}`;
+            
+            closeLeadModal();
         }
 
         document.addEventListener('DOMContentLoaded', () => {
