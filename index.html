@@ -93,12 +93,11 @@
     <nav class="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-md shadow-sm border-b border-ephata-green/10 transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
-                <div class="flex-shrink-0 flex items-center gap-2">
-                    <svg class="h-10 w-10 text-ephata-green" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 2L2 22h20L12 2zm0 4.5L18.5 20h-13L12 6.5z"/>
-                        <path d="M12 10l-3 6h6l-3-6z" fill="#FFD700"/>
-                    </svg>
-                    <span class="font-bold text-2xl tracking-tight text-ephata-green uppercase">Ephata<span class="text-ephata-gold">.</span></span>
+                <!-- LOGO UPDATE HERE -->
+                <div class="flex-shrink-0 flex items-center">
+                    <img src="https://static.wixstatic.com/media/aefc44_ba339e9f1dc7452a940f0d128d6c4dfb~mv2.png/v1/fill/w_426,h_126,al_c,lg_1,q_85,enc_avif,quality_auto/aefc44_ba339e9f1dc7452a940f0d128d6c4dfb~mv2.png" 
+                         alt="Ephata Solutions" 
+                         class="h-12 w-auto object-contain">
                 </div>
                 
                 <div class="flex items-center gap-6">
@@ -297,11 +296,11 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="text-3xl font-bold text-ephata-green uppercase mb-12 text-center" data-i18n="partners-title">Collaborate in Worldwide Innovation Hubs</h2>
             
-            <!-- FIXED MAP -->
-            <div class="relative w-full h-[600px] bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-200 mb-16">
-                <!-- High Contrast Map Image -->
-                <img src="https://upload.wikimedia.org/wikipedia/commons/2/2c/World_map_blank_gmt.svg" 
-                     class="absolute inset-0 w-full h-full object-cover opacity-100 pointer-events-none grayscale contrast-[0.5] brightness-125" 
+            <!-- FIXED MAP: Changed BG to slate-100 and switched to PNG for better contrast -->
+            <div class="relative w-full h-[600px] bg-slate-100 rounded-2xl overflow-hidden shadow-sm border border-gray-200 mb-16">
+                <!-- High Contrast Map Image (PNG Version) -->
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/World_map_blank_gmt.svg/2560px-World_map_blank_gmt.svg.png" 
+                     class="absolute inset-0 w-full h-full object-cover opacity-20 pointer-events-none mix-blend-multiply" 
                      alt="World Map">
                 
                 <!-- PINS (SOLID) -->
