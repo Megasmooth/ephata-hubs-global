@@ -58,15 +58,15 @@
                 radial-gradient(circle at 80% 20%, rgba(255, 215, 0, 0.3) 0%, transparent 20%);
         }
 
-        /* Accordion */
+        /* Accordion Animation */
         .accordion-content {
-            transition: max-height 0.4s ease-out, opacity 0.4s ease-out;
+            transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
             max-height: 0;
             opacity: 0;
             overflow: hidden;
         }
+        /* Class active is handled by JS setting explicit height */
         .accordion-content.active {
-            max-height: 500px;
             opacity: 1;
         }
 
@@ -104,7 +104,7 @@
     <nav class="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-md shadow-sm border-b border-ephata-green/10 transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
-                <!-- LOGO UPDATE HERE -->
+                <!-- LOGO -->
                 <div class="flex-shrink-0 flex items-center">
                     <img src="https://static.wixstatic.com/media/aefc44_ba339e9f1dc7452a940f0d128d6c4dfb~mv2.png/v1/fill/w_426,h_126,al_c,lg_1,q_85,enc_avif,quality_auto/aefc44_ba339e9f1dc7452a940f0d128d6c4dfb~mv2.png" 
                          alt="Ephata Solutions" 
@@ -121,8 +121,8 @@
                     </div>
                     
                     <div class="flex items-center bg-gray-100 rounded-full px-1 py-1 border border-gray-200">
-                        <button onclick="toggleLanguage('en')" id="btn-en" class="px-3 py-1 rounded-full text-xs font-bold transition-all duration-300 bg-ephata-green text-white shadow-sm">EN</button>
-                        <button onclick="toggleLanguage('pt')" id="btn-pt" class="px-3 py-1 rounded-full text-xs font-bold transition-all duration-300 text-gray-500 hover:text-ephata-green">PT</button>
+                        <button onclick="toggleLanguage('en')" id="btn-en" class="px-3 py-1 rounded-full text-xs font-bold transition-all duration-300">EN</button>
+                        <button onclick="toggleLanguage('pt')" id="btn-pt" class="px-3 py-1 rounded-full text-xs font-bold transition-all duration-300">PT</button>
                     </div>
                 </div>
             </div>
@@ -273,22 +273,23 @@
                 <h2 class="text-3xl md:text-4xl font-bold text-white uppercase mb-4" data-i18n="methods-title">Our 18 Proprietary Methodologies</h2>
                 <p class="text-ephata-gold max-w-2xl mx-auto mb-8" data-i18n="methods-subtitle">Comprehensive frameworks covering everything from patent strategy to cultural alignment.</p>
                 
-                <!-- Tab Buttons -->
+                <!-- Tab Buttons (ICONS UPDATED) -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12 max-w-4xl mx-auto">
                      <button onclick="filterMethodologies('individual')" class="tab-btn bg-white text-gray-500 hover:text-ephata-green text-left px-6 py-4 rounded-xl shadow-md transition-all group" id="tab-individual">
-                        <span class="block text-2xl mb-2">🧠</span>
+                        <img src="https://static.wixstatic.com/media/aefc44_5ae6ab49e9404709a0cff1d7d48fd96f~mv2.png" alt="Individual" class="w-12 h-12 mb-2 object-contain filter-icon">
                         <span class="block font-bold text-xl mb-1">INDIVIDUAL</span>
                         <span class="block text-xs opacity-70 uppercase tracking-wider mb-2">Mindset & Neuroscience</span>
                     </button>
                     
                     <button onclick="filterMethodologies('team')" class="tab-btn bg-white text-gray-500 hover:text-ephata-green text-left px-6 py-4 rounded-xl shadow-md transition-all group" id="tab-team">
-                        <span class="block text-2xl mb-2">🤝</span>
+                        <img src="https://static.wixstatic.com/media/aefc44_3435f6d0ba2842afbb0741226c612978~mv2.png" alt="Team" class="w-12 h-12 mb-2 object-contain filter-icon">
                         <span class="block font-bold text-xl mb-1">TEAM</span>
                         <span class="block text-xs opacity-70 uppercase tracking-wider mb-2">Synergy & Culture</span>
                     </button>
 
                     <button onclick="filterMethodologies('company')" class="tab-btn bg-ephata-green text-white shadow-lg text-left px-6 py-4 rounded-xl border-2 border-white transition-all group active" id="tab-company">
-                        <span class="block text-2xl mb-2">🏢</span>
+                        <!-- Added invert filter to make black icon white on green background -->
+                        <img src="https://static.wixstatic.com/media/aefc44_1382e12c592b407884ae3376d70d6bb2~mv2.png" alt="Company" class="w-12 h-12 mb-2 object-contain filter-icon">
                         <span class="block font-bold text-xl mb-1">COMPANY</span>
                         <span class="block text-xs text-ephata-gold uppercase tracking-wider mb-2">Strategy & Innovation</span>
                     </button>
@@ -302,53 +303,58 @@
         </div>
     </section>
 
-    <!-- 6. GLOBAL PARTNERSHIPS (Map Section) -->
+    <!-- 6. GLOBAL PARTNERSHIPS (Map Section - RESPONSIVE FIX) -->
     <section id="partners" class="py-24 bg-ephata-beige">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="text-3xl font-bold text-ephata-green uppercase mb-12 text-center" data-i18n="partners-title">Collaborate in Worldwide Innovation Hubs</h2>
             
-            <!-- FIXED MAP: Clean Approach with Silhouette -->
-            <div class="relative w-full h-[600px] bg-slate-50 rounded-2xl overflow-hidden shadow-sm border border-gray-200 mb-16">
-                <!-- High Contrast Map Image (Using Filter for silhouette effect) -->
-                <!-- Use a very standard, solid SVG and force it to be a faint black silhouette via CSS filters -->
+            <!-- FIXED MAP: Aspect Ratio 16:9 for responsiveness -->
+            <div class="relative w-full aspect-video bg-slate-50 rounded-2xl overflow-hidden shadow-sm border border-gray-200 mb-16">
+                <!-- High Contrast Map Image -->
                 <img src="https://upload.wikimedia.org/wikipedia/commons/8/80/World_map_-_low_resolution.svg" 
                      class="absolute inset-0 w-full h-full object-cover"
                      style="filter: grayscale(100%) brightness(0) opacity(0.1);" 
                      alt="World Map">
                 
-                <!-- PINS (SOLID) -->
-                <div id="pin-stlouis" class="absolute w-4 h-4 bg-ephata-green rounded-full border-2 border-white shadow-md z-20 cursor-help transition-transform duration-300 group" style="top: 32%; left: 23%;">
+                <!-- PINS (LARGER, PULSING) -->
+                <div id="pin-stlouis" class="absolute w-6 h-6 bg-ephata-green rounded-full border-2 border-white shadow-md z-20 cursor-help transition-transform duration-300 group hover:scale-125" style="top: 32%; left: 23%;">
+                     <span class="absolute inset-0 rounded-full bg-ephata-green animate-ping opacity-75"></span>
                     <span class="hidden group-hover:block absolute -top-10 left-1/2 -translate-x-1/2 bg-ephata-dark text-white text-sm font-bold py-2 px-4 rounded shadow-lg whitespace-nowrap z-40">St. Louis (39 North)</span>
                 </div>
                 
-                <div id="pin-valley" class="absolute w-4 h-4 bg-ephata-green rounded-full border-2 border-white shadow-md z-20 cursor-help transition-transform duration-300 group" style="top: 34%; left: 14%;">
+                <div id="pin-valley" class="absolute w-6 h-6 bg-ephata-green rounded-full border-2 border-white shadow-md z-20 cursor-help transition-transform duration-300 group hover:scale-125" style="top: 34%; left: 14%;">
+                     <span class="absolute inset-0 rounded-full bg-ephata-green animate-ping opacity-75"></span>
                     <span class="hidden group-hover:block absolute -top-10 left-1/2 -translate-x-1/2 bg-ephata-dark text-white text-sm font-bold py-2 px-4 rounded shadow-lg whitespace-nowrap z-40">Silicon Valley</span>
                 </div>
 
-                <div id="pin-illinois" class="absolute w-4 h-4 bg-ephata-green rounded-full border-2 border-white shadow-md z-20 cursor-help transition-transform duration-300 group" style="top: 31%; left: 24%;">
+                <div id="pin-illinois" class="absolute w-6 h-6 bg-ephata-green rounded-full border-2 border-white shadow-md z-20 cursor-help transition-transform duration-300 group hover:scale-125" style="top: 31%; left: 24%;">
+                     <span class="absolute inset-0 rounded-full bg-ephata-green animate-ping opacity-75"></span>
                     <span class="hidden group-hover:block absolute -top-10 left-1/2 -translate-x-1/2 bg-ephata-dark text-white text-sm font-bold py-2 px-4 rounded shadow-lg whitespace-nowrap z-40">Illinois (CABBI)</span>
                 </div>
 
-                <div id="pin-piracicaba" class="absolute w-4 h-4 bg-ephata-green rounded-full border-2 border-white shadow-md z-20 cursor-help transition-transform duration-300 group" style="top: 72%; left: 34%;">
+                <div id="pin-piracicaba" class="absolute w-6 h-6 bg-ephata-green rounded-full border-2 border-white shadow-md z-20 cursor-help transition-transform duration-300 group hover:scale-125" style="top: 72%; left: 34%;">
+                     <span class="absolute inset-0 rounded-full bg-ephata-green animate-ping opacity-75"></span>
                     <span class="hidden group-hover:block absolute -top-10 left-1/2 -translate-x-1/2 bg-ephata-dark text-white text-sm font-bold py-2 px-4 rounded shadow-lg whitespace-nowrap z-40">Piracicaba (AgTech)</span>
                 </div>
 
-                <div id="pin-ribeirao" class="absolute w-4 h-4 bg-ephata-green rounded-full border-2 border-white shadow-md z-20 cursor-help transition-transform duration-300 group" style="top: 70%; left: 35%;">
+                <div id="pin-ribeirao" class="absolute w-6 h-6 bg-ephata-green rounded-full border-2 border-white shadow-md z-20 cursor-help transition-transform duration-300 group hover:scale-125" style="top: 70%; left: 35%;">
+                     <span class="absolute inset-0 rounded-full bg-ephata-green animate-ping opacity-75"></span>
                     <span class="hidden group-hover:block absolute -top-10 left-1/2 -translate-x-1/2 bg-ephata-dark text-white text-sm font-bold py-2 px-4 rounded shadow-lg whitespace-nowrap z-40">Ribeirão Preto</span>
                 </div>
 
-                <div id="pin-wageningen" class="absolute w-4 h-4 bg-ephata-green rounded-full border-2 border-white shadow-md z-20 cursor-help transition-transform duration-300 group" style="top: 24%; left: 49%;">
+                <div id="pin-wageningen" class="absolute w-6 h-6 bg-ephata-green rounded-full border-2 border-white shadow-md z-20 cursor-help transition-transform duration-300 group hover:scale-125" style="top: 24%; left: 49%;">
+                     <span class="absolute inset-0 rounded-full bg-ephata-green animate-ping opacity-75"></span>
                     <span class="hidden group-hover:block absolute -top-10 left-1/2 -translate-x-1/2 bg-ephata-dark text-white text-sm font-bold py-2 px-4 rounded shadow-lg whitespace-nowrap z-40">Food Valley (NL)</span>
                 </div>
 
-                <!-- Ghost Pins - UPDATED TO BLACK FOR CONTRAST -->
-                <div class="absolute w-3 h-3 bg-black rounded-full z-10 opacity-60" style="top: 31%; left: 25%;" title="Indiana"></div>
-                <div class="absolute w-3 h-3 bg-black rounded-full z-10 opacity-60" style="top: 30%; left: 27%;" title="New York"></div>
-                <div class="absolute w-3 h-3 bg-black rounded-full z-10 opacity-60" style="top: 38%; left: 24%;" title="Louisiana"></div>
-                <div class="absolute w-3 h-3 bg-black rounded-full z-10 opacity-60" style="top: 28%; left: 26%;" title="Canada"></div>
-                <div class="absolute w-3 h-3 bg-black rounded-full z-10 opacity-60" style="top: 50%; left: 22%;" title="Costa Rica"></div>
-                <div class="absolute w-3 h-3 bg-black rounded-full z-10 opacity-60" style="top: 80%; left: 32%;" title="Argentina"></div>
-                <div class="absolute w-3 h-3 bg-black rounded-full z-10 opacity-60" style="top: 78%; left: 29%;" title="Chile"></div>
+                <!-- Ghost Pins - LIGHTER GREY/BLACK, SMALLER -->
+                <div class="absolute w-2 h-2 bg-black rounded-full z-10 opacity-30" style="top: 31%; left: 25%;" title="Indiana"></div>
+                <div class="absolute w-2 h-2 bg-black rounded-full z-10 opacity-30" style="top: 30%; left: 27%;" title="New York"></div>
+                <div class="absolute w-2 h-2 bg-black rounded-full z-10 opacity-30" style="top: 38%; left: 24%;" title="Louisiana"></div>
+                <div class="absolute w-2 h-2 bg-black rounded-full z-10 opacity-30" style="top: 28%; left: 26%;" title="Canada"></div>
+                <div class="absolute w-2 h-2 bg-black rounded-full z-10 opacity-30" style="top: 50%; left: 22%;" title="Costa Rica"></div>
+                <div class="absolute w-2 h-2 bg-black rounded-full z-10 opacity-30" style="top: 80%; left: 32%;" title="Argentina"></div>
+                <div class="absolute w-2 h-2 bg-black rounded-full z-10 opacity-30" style="top: 78%; left: 29%;" title="Chile"></div>
             </div>
 
             <!-- Table Lead Magnet -->
@@ -393,16 +399,28 @@
         </div>
     </section>
 
-    <!-- 7. CLIENT LOGOS (NO EMOJIS, CLEAN) -->
-    <section class="py-24 bg-white">
+    <!-- 7. CLIENT LOGOS & COUNTERS (ANIMATED) -->
+    <section class="py-24 bg-white" id="counters-section">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="text-center text-3xl font-bold text-ephata-green uppercase mb-16" data-i18n="impact-title">Our Global Footprint</h2>
             
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center mb-20">
-                <div class="p-6 bg-gray-50 rounded-xl"><div class="text-4xl font-extrabold text-ephata-purple mb-2">150+</div><div class="text-xs uppercase font-bold text-gray-500">Projects Delivered</div></div>
-                <div class="p-6 bg-gray-50 rounded-xl"><div class="text-4xl font-extrabold text-ephata-green mb-2">27</div><div class="text-xs uppercase font-bold text-gray-500">Countries Reached</div></div>
-                <div class="p-6 bg-gray-50 rounded-xl"><div class="text-4xl font-extrabold text-ephata-orange mb-2">7.5k+</div><div class="text-xs uppercase font-bold text-gray-500">Leaders Trained</div></div>
-                <div class="p-6 bg-gray-50 rounded-xl"><div class="text-4xl font-extrabold text-ephata-gold mb-2">80%</div><div class="text-xs uppercase font-bold text-gray-500">Efficiency Gain</div></div>
+                <div class="p-6 bg-gray-50 rounded-xl">
+                    <div class="text-4xl font-extrabold text-ephata-purple mb-2 flex justify-center"><span id="count-projects">0</span>+</div>
+                    <div class="text-xs uppercase font-bold text-gray-500">Projects Delivered</div>
+                </div>
+                <div class="p-6 bg-gray-50 rounded-xl">
+                    <div class="text-4xl font-extrabold text-ephata-green mb-2 flex justify-center"><span id="count-countries">0</span></div>
+                    <div class="text-xs uppercase font-bold text-gray-500">Countries Reached</div>
+                </div>
+                <div class="p-6 bg-gray-50 rounded-xl">
+                    <div class="text-4xl font-extrabold text-ephata-orange mb-2 flex justify-center"><span id="count-leaders">0</span>k+</div>
+                    <div class="text-xs uppercase font-bold text-gray-500">Leaders Trained</div>
+                </div>
+                <div class="p-6 bg-gray-50 rounded-xl">
+                    <div class="text-4xl font-extrabold text-ephata-gold mb-2 flex justify-center"><span id="count-efficiency">0</span>%</div>
+                    <div class="text-xs uppercase font-bold text-gray-500">Efficiency Gain</div>
+                </div>
             </div>
 
             <p class="text-center text-gray-400 uppercase tracking-widest text-sm mb-12">Trusted By Industry Giants</p>
@@ -454,8 +472,8 @@
         </div>
     </footer>
 
-    <!-- MODAL LEAD FORM -->
-    <div id="lead-modal" class="modal fixed inset-0 z-50 flex items-center justify-center p-4">
+    <!-- MODAL LEAD FORM (Z-Index Fixed) -->
+    <div id="lead-modal" class="modal fixed inset-0 z-[9999] flex items-center justify-center p-4">
         <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" onclick="closeLeadModal()"></div>
         <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg relative z-10 overflow-hidden">
             <div class="bg-ephata-green p-6 flex justify-between items-center">
@@ -544,27 +562,26 @@
                 "founders-title": "Meet Our Visionary Founders", "founders-subtitle": "A synergistic blend of Hard Skills and Soft Skills.",
                 "marcio-bio": "18+ years global experience (Huawei, BT, Netreo). Author of \"Empower Your Team\". Expert in Scalable Architecture, IP Assets, and Innovation Engineering.",
                 "marcio-quote": "\"Engineering Mind\"",
-                "aline-bio": "15+ years experience. Specialist in Neuroscience & Behavior (PUCRS). Focus on Human Development, Cultural Transformation, and Behavioral Efficiency.
-                ",
+                "aline-bio": "15+ years experience. Specialist in Neuroscience & Behavior (PUCRS). Focus on Human Development, Cultural Transformation, and Behavioral Efficiency.",
                 "aline-quote": "\"Neuroscience Heart\""
             },
             pt: {
                 "nav-about": "Sobre", "nav-founders": "Fundadores", "nav-methods": "Metodologias", "nav-partners": "Hubs Globais", "nav-contact": "Contato",
-                "hero-title": "Transformando Cultura em Resultado e Legado no Agronegócio",
-                "hero-subtitle": "Estratégia de Engenharia & Neurociência com Marcio & Aline Almeida",
+                "hero-title": "Transformando cultura em resultado e legado no agronegócio",
+                "hero-subtitle": "Estratégia de engenharia & neurociência com Marcio & Aline Almeida",
                 "hero-motto": "\"Inspirar, Educar e Dialogar\"",
-                "hero-cta": "Explorar Parcerias", "hero-cta-2": "Nossas Metodologias",
+                "hero-cta": "Explorar Parcerias", "hero-cta-2": "Nossas metodologias",
                 "about-title": "Descubra a Ephata Solutions",
-                "about-desc": "Somos uma ponte estratégica conectando o potencial do Agronegócio e Tecnologia brasileira a ecossistemas globais como Vale do Silício e Boston. Com mais de 150 projetos entregues em 27 países, geramos resultados reais—como 80% de melhoria financeira em casos de eficiência.",
+                "about-desc": "Somos uma ponte estratégica conectando o potencial do agronegócio e tecnologia brasileira a ecossistemas globais como Vale do Silício e Boston. Com mais de 150 projetos entregues em 27 países, geramos resultados reais—como 80% de melhoria financeira em casos de eficiência.",
                 "ephata-origin": "Ephata (é.fa.ta) vem de uma palavra grega (εφατά) encontrada especificamente na passagem bíblica de Marcos (Mc 7,34) quando Jesus diz ao surdo: EFATÁ (Abra-te). É com esta inspiração que a Ephata se alinha com você, destrancando seu potencial e ajudando você a ir além.",
                 "agro-title": "Dos Canaviais ao Capital Intelectual Global",
                 "agro-desc": "O Brasil já é a potência líder mundial em produção de bioenergia. O próximo passo é liderar a tecnologia. A Ephata conecta o chão de fábrica da sua Usina aos ecossistemas de inovação de St. Louis (39 North) e Vale do Silício. Transformamos sua eficiência agronômica e industrial em ativos de Propriedade Intelectual (patentes e processos) valorizados globalmente. Não exporte apenas etanol e açúcar; exporte inovação.",
                 "methods-title": "Nossas 18 Metodologias Proprietárias",
                 "methods-subtitle": "Frameworks abrangentes cobrindo desde estratégia de patentes até alinhamento cultural.",
                 "partners-title": "Colaboração em Hubs de Inovação Globais",
-                "download-cta": "Baixar Relatório de Inteligência (PDF) - +50 Hubs",
-                "impact-title": "Nossa Pegada Global",
-                "faq-title": "Perguntas Frequentes",
+                "download-cta": "Baixar relatório de inteligência (PDF) - +50 Hubs",
+                "impact-title": "Nossa pegada global",
+                "faq-title": "Perguntas frequentes",
                 "footer-btn-call": "Agendar Reunião", "footer-btn-pdf": "Baixar Portfólio",
                 "founders-title": "Conheça Nossos Fundadores", "founders-subtitle": "Uma mistura sinérgica de Hard Skills e Soft Skills.",
                 "marcio-bio": "Mais de 18 anos de exp global (Huawei, BT, Netreo). Autor de \"Empower Your Team\". Especialista em Arquitetura Escalável, Gestão de Ativos e Engenharia de Inovação.",
@@ -574,7 +591,6 @@
             }
         };
 
-        // Data Lists (NO PADOCA)
         const methodologiesData = [
             { code: "GAE®", category: "company", nameEn: "Strategic Asset Management", namePt: "Gestão de Ativos", descEn: "Patent strategy & IP protection.", descPt: "Estratégia de patentes e proteção de IP." },
             { code: "ASIR®", category: "company", nameEn: "Regenerative Innovation Architecture", namePt: "Arquitetura de Inovação", descEn: "Roadmaps H1-H3 & TRL Analysis.", descPt: "Roadmaps H1-H3 e Análise TRL." },
@@ -602,26 +618,37 @@
             { qEn: "Is there room for academic research partnerships?", qPt: "Existe espaço para parcerias de pesquisa acadêmica?", aEn: "Yes. ECIC® methodology bridges academia (like Esalq/USP and Cornell) with industry to turn research into market products.", aPt: "Sim. A metodologia ECIC® une academia (como Esalq/USP e Cornell) à indústria para transformar pesquisa em produtos de mercado." }
         ];
 
-        // LOGIC
+        // METHODOLOGY TABS LOGIC
         function filterMethodologies(category) {
-            // 1. Reset
+            // 1. Reset Styles
             ['individual', 'team', 'company'].forEach(cat => {
                 const btn = document.getElementById('tab-' + cat);
                 if(btn) {
                     btn.classList.remove('bg-ephata-green', 'text-white', 'shadow-lg');
                     btn.classList.add('bg-white', 'text-gray-500', 'hover:text-ephata-green');
-                    // Reset border styling if needed, keeping simple class switch as requested
+                    // Reset Icon Filter
+                    const img = btn.querySelector('img');
+                    if(img) {
+                         img.classList.remove('brightness-0', 'invert');
+                         // Default black/dark gray icon logic
+                    }
                 }
             });
 
-            // 2. Activate
+            // 2. Activate Style
             const activeBtn = document.getElementById('tab-' + category);
             if(activeBtn) {
                 activeBtn.classList.remove('bg-white', 'text-gray-500', 'hover:text-ephata-green');
                 activeBtn.classList.add('bg-ephata-green', 'text-white', 'shadow-lg');
+                
+                // Add filter to invert color (make white) on dark green background
+                const img = activeBtn.querySelector('img');
+                if(img) {
+                    img.classList.add('brightness-0', 'invert');
+                }
             }
 
-            // 3. Filter & Render
+            // 3. Render Items
             const currentLang = localStorage.getItem('ephata-lang') || 'en';
             const container = document.getElementById('accordion-container');
             container.innerHTML = '';
@@ -638,7 +665,7 @@
                             <span class="font-bold text-lg flex items-center">
                                 <span class="text-ephata-gold mr-3">${item.code}</span> ${name}
                             </span>
-                            <span id="icon-meth-${index}" class="text-2xl font-light transform transition-transform">+</span>
+                            <span id="icon-meth-${index}" class="text-2xl font-light transform transition-transform text-white">+</span>
                         </button>
                         <div id="meth-${index}" class="accordion-content bg-black/20">
                             <div class="px-6 py-4 text-gray-200 border-t border-white/10 text-sm leading-relaxed"><p>${desc}</p></div>
@@ -648,35 +675,29 @@
             });
         }
 
-        // Interaction Maps
-        function highlightPin(id) {
-            const pin = document.getElementById(id);
-            if(pin) {
-                pin.classList.add('scale-150');
-            }
-        }
-        function resetPin(id) {
-            const pin = document.getElementById(id);
-            if(pin) {
-                pin.classList.remove('scale-150');
-            }
-        }
-
+        // ACCORDION LOGIC
         function toggleAccordion(id) {
             const content = document.getElementById(id);
             const icon = document.getElementById('icon-' + id);
-            content.classList.toggle('active');
+            
             if (content.classList.contains('active')) {
+                // Close
+                content.classList.remove('active');
+                content.style.maxHeight = null;
+                icon.style.transform = 'rotate(0deg)';
+            } else {
+                // Open
+                content.classList.add('active');
+                content.style.maxHeight = content.scrollHeight + "px";
                 icon.style.transform = 'rotate(45deg)'; 
                 if(id.startsWith('faq')) icon.style.transform = 'rotate(180deg)'; 
-            } else {
-                icon.style.transform = 'rotate(0deg)';
             }
         }
 
+        // FAQ RENDER
         function renderFAQs(lang) {
             const container = document.getElementById('faq-container');
-            container.innerHTML = '';
+            container.innerHTML = ''; // Clear existing
             faqData.forEach((item, index) => {
                 const q = lang === 'en' ? item.qEn : item.qPt;
                 const a = lang === 'en' ? item.aEn : item.aPt;
@@ -694,38 +715,63 @@
             });
         }
 
+        // LANGUAGE TOGGLE
         function toggleLanguage(lang) {
             localStorage.setItem('ephata-lang', lang);
             updateLanguageUI(lang);
         }
 
         function updateLanguageUI(lang) {
+            // Update Text
             const t = translations[lang];
             for (const key in t) {
                 const el = document.querySelector(`[data-i18n="${key}"]`);
                 if (el) el.innerHTML = t[key];
             }
             
-            // Buttons
+            // Update Buttons State (Force correct classes)
             const btnEn = document.getElementById('btn-en');
             const btnPt = document.getElementById('btn-pt');
+
+            // Reset base classes for both
+            const inactiveClasses = ['bg-transparent', 'text-gray-500'];
+            const activeClasses = ['bg-ephata-green', 'text-white', 'shadow-sm'];
+            
             if (lang === 'en') {
-                btnEn.classList.replace('text-gray-500', 'text-white'); btnEn.classList.replace('bg-transparent', 'bg-ephata-green'); btnEn.classList.add('shadow-sm');
-                btnPt.classList.replace('text-white', 'text-gray-500'); btnPt.classList.replace('bg-ephata-green', 'bg-transparent'); btnPt.classList.remove('shadow-sm');
+                btnEn.classList.remove(...inactiveClasses);
+                btnEn.classList.add(...activeClasses);
+                
+                btnPt.classList.remove(...activeClasses);
+                btnPt.classList.add(...inactiveClasses);
             } else {
-                btnPt.classList.replace('text-gray-500', 'text-white'); btnPt.classList.replace('bg-transparent', 'bg-ephata-green'); btnPt.classList.add('shadow-sm');
-                btnEn.classList.replace('text-white', 'text-gray-500'); btnEn.classList.replace('bg-ephata-green', 'bg-transparent'); btnEn.classList.remove('shadow-sm');
+                btnPt.classList.remove(...inactiveClasses);
+                btnPt.classList.add(...activeClasses);
+                
+                btnEn.classList.remove(...activeClasses);
+                btnEn.classList.add(...inactiveClasses);
             }
 
-            // Re-render
-            let activeCat = 'company';
-            if(document.getElementById('tab-individual').classList.contains('bg-ephata-green')) activeCat = 'individual';
-            if(document.getElementById('tab-team').classList.contains('bg-ephata-green')) activeCat = 'team';
+            // Re-render Dynamic Content
+            // Determine active methodology tab
+            let activeCat = 'company'; // Default
+            if(document.getElementById('tab-individual') && document.getElementById('tab-individual').classList.contains('bg-ephata-green')) activeCat = 'individual';
+            if(document.getElementById('tab-team') && document.getElementById('tab-team').classList.contains('bg-ephata-green')) activeCat = 'team';
+            
             filterMethodologies(activeCat);
             renderFAQs(lang);
         }
 
-        /* MODAL LOGIC */
+        // MAP INTERACTION
+        function highlightPin(id) {
+            const pin = document.getElementById(id);
+            if(pin) pin.classList.add('scale-150');
+        }
+        function resetPin(id) {
+            const pin = document.getElementById(id);
+            if(pin) pin.classList.remove('scale-150');
+        }
+
+        // MODAL
         function openLeadModal() {
             document.getElementById('lead-modal').classList.add('open');
             document.body.style.overflow = 'hidden';
@@ -744,31 +790,55 @@
             const job = document.getElementById('lead-job').value;
             const mobile = document.getElementById('lead-mobile').value;
             
-            // Get Checkboxes
             const checkboxes = document.querySelectorAll('input[name="interest"]:checked');
             let interests = [];
-            checkboxes.forEach((cb) => {
-                interests.push(cb.value);
-            });
+            checkboxes.forEach((cb) => interests.push(cb.value));
             
             const subject = encodeURIComponent(`Ephata Portfolio Request: ${name} (${company})`);
             const body = encodeURIComponent(
-                `Name: ${name}\n` +
-                `Email: ${email}\n` +
-                `Company: ${company}\n` +
-                `Job Title: ${job}\n` +
-                `Mobile: ${mobile}\n\n` +
-                `Interests:\n- ${interests.join('\n- ')}\n`
+                `Name: ${name}\nEmail: ${email}\nCompany: ${company}\nJob Title: ${job}\nMobile: ${mobile}\n\nInterests:\n- ${interests.join('\n- ')}\n`
             );
             
             window.location.href = `mailto:contato@ephata.solutions?subject=${subject}&body=${body}`;
-            
             closeLeadModal();
         }
 
+        // COUNTER ANIMATION
+        function animateValue(obj, start, end, duration) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                obj.innerHTML = Math.floor(progress * (end - start) + start);
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        function initCounters() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        animateValue(document.getElementById("count-projects"), 0, 150, 2000);
+                        animateValue(document.getElementById("count-countries"), 0, 27, 2000);
+                        animateValue(document.getElementById("count-leaders"), 0, 7.5, 2000); // Logic for float needed if strict
+                        animateValue(document.getElementById("count-efficiency"), 0, 80, 2000);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            const section = document.getElementById('counters-section');
+            if(section) observer.observe(section);
+        }
+
+        // INIT
         document.addEventListener('DOMContentLoaded', () => {
             const savedLang = localStorage.getItem('ephata-lang') || 'en';
             updateLanguageUI(savedLang);
+            initCounters();
         });
     </script>
 </body>
