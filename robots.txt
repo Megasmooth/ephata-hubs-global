@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /path/to/spam-content/
+Disallow: /path/to/private-data/
+
+# Allow AI tools to access structured data
+Allow: /path/to/structured-data/
